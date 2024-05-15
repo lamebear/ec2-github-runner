@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: main
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 16 # Node v16 is required for the @vercel/ncc to work. TODO: update the package tool and then update the node version here.
+          node-version: 20
 
       - name: Install packages
         run: npm ci

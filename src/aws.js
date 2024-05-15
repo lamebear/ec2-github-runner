@@ -49,6 +49,17 @@ async function startEc2Instance(label, githubRegistrationToken) {
     TagSpecifications: config.tagSpecifications,
   };
 
+  if (config.input.volumeSize) {
+    params.BlockDeviceMappings = [
+      {
+        DeviceName: config.input.volumeIdentifier,
+        Ebs: {
+          VolumeSize: config.input.volumeSize,
+        },
+      },
+    ];
+  }
+
   try {
     const result = await ec2.runInstances(params).promise();
     const ec2InstanceId = result.Instances[0].InstanceId;
